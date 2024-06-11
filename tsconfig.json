@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        // Specify ECMAScript target version
+        "target": "ES2020", 
+        // Specify module code generation
+        "module": "nodenext", 
+        // Specify module resolution strategy
+        "moduleResolution": "nodenext", 
+        // Redirect output structure to the directory
+        "outDir": "./backend/dist",
+        // Specify the root directory of input files
+        "rootDir": "./backend",
+        // Enable all strict type-checking options
+        "strict": true, 
+        // Enable interoperability between CommonJS and ES Modules
+        "esModuleInterop": true, 
+        // Skip type checking of all declaration files
+        "skipLibCheck": true 
+    },
+    // Include all TypeScript files in the specified directory
+    "include": ["backend/src/**/*"], 
+    // Exclude specified directories and files from compilation
+    "exclude": ["node_modules", "**/*.spec.ts", "frontend"] 
+}
