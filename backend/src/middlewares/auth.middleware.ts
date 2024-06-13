@@ -34,6 +34,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         // Verify the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
 
+        console.log(decoded)
+
         if (!decoded) {
             return res.status(400).json({
                 error: "Invalid token"
@@ -46,6 +48,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
                 id: true
             }
         });
+
+        console.log(user)
 
         if (!user) {
             return res.status(400).json({

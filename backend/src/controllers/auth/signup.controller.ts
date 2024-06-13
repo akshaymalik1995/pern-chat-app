@@ -56,7 +56,7 @@ export default async (req: Request, res: Response) => {
         // If user creation is successful, return the user data
         if (newUser) {
 
-            const token = generateToken(username)
+            const token = generateToken(newUser.id)
 
             // Setting the token as a cookie in the response
             addTokenToCookie(res, token);
