@@ -7,7 +7,7 @@ export default function LogoutButton() {
     }
   return (
     <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      className="bg-blue-500 hover:bg-blue-700 w-full text-white font-bold py-2 px-4"
       onClick={handleLogout}
     >
       {loading ? "Loading..." : "Logout"}

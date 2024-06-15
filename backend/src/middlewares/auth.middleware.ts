@@ -20,8 +20,10 @@ declare global {
 
 
 export default async (req: Request, res: Response, next: NextFunction) => {
+    
     // Get the token from the cookie
     const token = req.cookies.jwt;
+
 
     // If no token is found in the header, return an error response
     if (!token) {
@@ -34,7 +36,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         // Verify the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
 
-        console.log(decoded)
+        
 
         if (!decoded) {
             return res.status(400).json({
@@ -49,8 +51,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
             }
         });
 
-        console.log(user)
-
+        
         if (!user) {
             return res.status(400).json({
                 error: "Invalid token"
@@ -58,6 +59,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         }
 
         req.user = user;
+
+        
 
         next();
     } catch (error: any) {

@@ -44,13 +44,14 @@ export default async (req: Request, res: Response) => {
             select: {
                 id: true,
                 username: true,
-                profilePic: true
+                profilePic: true,
+                fullname : true
             }
         });
 
         // Return the active chat users
         res.status(200).json({
-            data: activeChatUsers
+            data : activeChatUsers
         });
 
     } catch (error: any) {

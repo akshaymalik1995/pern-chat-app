@@ -50,15 +50,15 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
             try {
                 // Fetch the authenticated user data from the server
                 const response = await fetch('/api/auth/myself')
-                const data = await response.json()
+                const result = await response.json()
 
                 if (!response.ok) {
                     // If the response is not successful, throw an error
-                    throw new Error(data.error)
+                    throw new Error(result.error)
                 }
 
                 // Set the authenticated user data
-                setAuthUser(data)
+                setAuthUser(result.data)
             } catch (error) {
                 console.error('Failed to fetch the authenticated user data:', error)
             } finally {

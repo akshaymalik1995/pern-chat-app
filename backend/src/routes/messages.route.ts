@@ -6,9 +6,12 @@ import conversationsControllers from "../controllers/messages/conversations.cont
 
 const router = express.Router()
 
+router.post("/send/:id", authMiddleware, sendMessageController)
 router.get("/conversations", authMiddleware, conversationsControllers)
 router.get("/:id", authMiddleware, getMessagesController)
-router.get("/send/:id", authMiddleware, sendMessageController)
+
+
+
 
 
 export default router

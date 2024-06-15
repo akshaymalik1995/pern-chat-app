@@ -6,7 +6,7 @@ export default async (req: Request, res: Response) => {
     try {
         const { id: userToChatId } = req.params; // Get the userToChatId from request parameters
         const { id: userId } = req.user; // Get the userId from authenticated user
-
+        
         // Find the conversation between the two users
         const conversation = await prisma.conversation.findFirst({
             where: {
@@ -19,10 +19,12 @@ export default async (req: Request, res: Response) => {
                     orderBy: {
                         createdAt: "asc" // Order messages by createdAt in ascending order
                     },
-                    take: 10 // Limit the number of messages to 10
+                    // take: 10 // Limit the number of messages to 10
                 }
             }
         });
+
+        
 
         if (!conversation) {
             // If conversation doesn't exist, return an empty array
