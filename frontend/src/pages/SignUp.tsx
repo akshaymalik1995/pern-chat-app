@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useSignup from "../hooks/useSignup";
-import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 
 export default function SignUp() {

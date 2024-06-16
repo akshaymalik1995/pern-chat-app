@@ -7,8 +7,10 @@ exports.server = exports.io = exports.app = exports.getReceiverSocketId = void 0
 const socket_io_1 = require("socket.io"); // Importing the Server class from the "socket.io" module
 const http_1 = __importDefault(require("http")); // Importing the "http" module
 const express_1 = __importDefault(require("express")); // Importing the "express" module
+const dotenv_1 = __importDefault(require("dotenv")); // Importing the "dotenv" module
 const app = (0, express_1.default)(); // Creating an instance of the Express application
 exports.app = app;
+dotenv_1.default.config();
 const getReceiverSocketId = (receiverId) => {
     // Function to get the socket ID of the receiver user
     return userSockets.get(receiverId); // Returning the socket ID of the receiver user from the userSockets Map
@@ -18,7 +20,7 @@ const server = http_1.default.createServer(app); // Creating an HTTP server usin
 exports.server = server;
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: "*", // Allowing requests from the specified client URL
+        origin: [process.env.CLIENT_URL], // Allowing requests from the specified client URL
         methods: ["GET", "POST"], // Allowing only GET and POST methods
     },
 });

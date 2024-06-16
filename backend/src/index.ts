@@ -25,9 +25,9 @@ const __dirname = path.resolve() // Define the current directory
 if (process.env.NODE_ENV === "production") { // Check if the environment is production
     app.use(express.static(path.join(__dirname, "../frontend/dist/"))) // Serve the static files from the frontend/dist directory
     app.get("*", (req: Request, res: Response) => { // Route to handle all other requests
-        res.sendFile(path.join(__dirname, "../frontend/dist/index.html")) // Send the index.html file
+        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html")) // Send the index.html file
     }
-        
+
     )
 }
 
