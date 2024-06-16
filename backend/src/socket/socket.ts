@@ -14,7 +14,7 @@ const server = http.createServer(app); // Creating an HTTP server using the Expr
 
 const io = new Server(server, { // Creating a new instance of the Socket.IO server
     cors: {
-        origin: [process.env.CLIENT_URL!], // Allowing requests from the specified client URL
+        origin: "*", // Allowing requests from the specified client URL
         methods: ["GET", "POST"], // Allowing only GET and POST methods
     },
 });
