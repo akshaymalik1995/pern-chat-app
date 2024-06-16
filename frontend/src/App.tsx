@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      <div className="h-screen flex items-center justify-center ">
+      <div className="h-screen max-h-screen flex items-center justify-center ">
         <ToastContainer />
         <Routes>
           <Route path="/" element={authUser ? <Home /> : <Navigate to={"/login"} />} />
