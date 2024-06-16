@@ -17,11 +17,11 @@ socket_1.app.use((0, cookie_parser_1.default)()); // Middleware for parsing cook
 socket_1.app.use("/api/auth", auth_route_1.default); // Mount the auth routes at /api/auth
 socket_1.app.use("/api/messages", messages_route_1.default); // Mount the messages routes at /api/messages
 const PORT = process.env.PORT || 5000; // Define the port number
-const __dirname = path_1.default.resolve(); // Define the current directory
+const dirname = path_1.default.resolve(); // Define the current directory
 if (process.env.NODE_ENV === "production") { // Check if the environment is production
-    socket_1.app.use(express_1.default.static(path_1.default.join(__dirname, "../frontend/dist/"))); // Serve the static files from the frontend/dist directory
+    socket_1.app.use(express_1.default.static(path_1.default.join(dirname, "../frontend/dist/"))); // Serve the static files from the frontend/dist directory
     socket_1.app.get("*", (req, res) => {
-        res.sendFile(path_1.default.join(__dirname, "frontend", "dist", "index.html")); // Send the index.html file
+        res.sendFile(path_1.default.join(dirname, "frontend", "dist", "index.html")); // Send the index.html file
     });
 }
 socket_1.server.listen(PORT, () => {

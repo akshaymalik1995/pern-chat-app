@@ -11,34 +11,51 @@ export default async (req: Request, res: Response) => {
         const { id: userId } = req.user; // Get the userId from authenticated user
 
         // Find all the users with whom the authenticated user has an active conversation
-        const users: {participantIds : string[]}[] = await prisma.conversation.findMany({
-            where: {
-                participantIds: {
-                    has: userId // Check if the conversation has userId as a participant
-                }
-            },
-            select: {
-                participantIds: true, 
-            }
-        });
+        // const users: {participantIds : string[]}[] = await prisma.conversation.findMany({
+        //     where: {
+        //         participantIds: {
+        //             has: userId // Check if the conversation has userId as a participant
+        //         }
+        //     },
+        //     select: {
+        //         participantIds: true, 
+        //     }
+        // });
 
-        // If there are no users, return an empty array
-        if (!users.length) {
-            return res.status(200).json({
-                data: []
-            });
-        }
+        // // If there are no users, return an empty array
+        // if (!users.length) {
+        //     return res.status(200).json({
+        //         data: []
+        //     });
+        // }
+        
+        
 
-        // Extract the participantIds from the users
-        const participantIds : string[] = users.map(user => user.participantIds).flat();
+        // // Extract the participantIds from the users
+        // const participantIds : string[] = users.map(user => user.participantIds).flat();
 
-        // Find the active chat users
-        const activeChatUserIds = participantIds.filter(id => id !== userId);
+        // // Find the active chat users
+        // const activeChatUserIds = participantIds.filter(id => id !== userId);
 
+        // const activeChatUsers = await prisma.user.findMany({
+        //     where: {
+        //         id: {
+        //             in: activeChatUserIds
+        //         }
+        //     },
+        //     select: {
+        //         id: true,
+        //         username: true,
+        //         profilePic: true,
+        //         fullname : true
+        //     }
+        // });
+        
+        // Select all users
         const activeChatUsers = await prisma.user.findMany({
             where: {
                 id: {
-                    in: activeChatUserIds
+                    not: userId // Exclude the authenticated user
                 }
             },
             select: {
