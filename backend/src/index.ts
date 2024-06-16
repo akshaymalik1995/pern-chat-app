@@ -20,12 +20,13 @@ app.use("/api/messages", messagesRoute) // Mount the messages routes at /api/mes
 
 const PORT = process.env.PORT || 5000 // Define the port number
 
+const dirname = path.resolve() // Get the current directory name
 
 
 if (process.env.NODE_ENV !== "development") { // Check if the environment is production
-    app.use(express.static(path.join(__dirname, "/frontend/dist/"))) // Serve the static files from the frontend/dist directory
+    app.use(express.static(path.join(dirname, "frontend" , "dist", "/"))) // Serve the static files from the frontend/dist directory
     app.get("*", (req: Request, res: Response) => { // Route to handle all other requests
-        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html")) // Send the index.html file
+        res.sendFile(path.join(dirname, "frontend", "dist", "index.html")) // Send the index.html file
     }
 
     )
