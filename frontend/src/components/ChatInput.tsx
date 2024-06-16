@@ -5,10 +5,12 @@ import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import Spinner from "./UI/Spinner";
 import { toast } from "react-toastify";
+import useListenMessages from "../hooks/useListenMessages";
 
 export default function ChatInput() {
   const { sendMessage , loading} = useSendMessage();
   const [message, setMessage] = useState("");
+  useListenMessages()
 
   async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

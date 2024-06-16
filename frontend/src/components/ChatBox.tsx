@@ -1,19 +1,16 @@
 import useGetMessages from "../hooks/useGetMessages"
 import Spinner from "./UI/Spinner";
 import { useAuthContext } from "../context/AuthContext";
-
+import  showTime  from "../utils/showTime";
+import useScrollToBottom from "../hooks/useScrollToBottom";
 
 export default function ChatBox() {
-  const { messages, loading } = useGetMessages();
-  const { authUser } = useAuthContext();
-  function showTime(time: Date) {
-    const date = new Date(time);
-    const hours = date.getHours().toString().padStart(2, "0")
-    const minutes = date.getMinutes().toString().padStart(2, "0")
-    return `${hours}:${minutes}`
-  }
+  const { messages, loading } = useGetMessages(); // Use the useGetMessages hook to get the messages
+  const { authUser } = useAuthContext(); // Access the authUser from the AuthContext
+  const ref = useScrollToBottom([messages]) as React.MutableRefObject<HTMLDivElement>; // Use the useScrollToBottom hook to scroll to the bottom of the chat box
+  
   return (
-      <div id="chat-box" className="grow p-5 h-[60vh] overflow-y-auto bg-slate-200">
+      <div ref={ref} className="grow p-5 h-[60vh] overflow-y-auto bg-slate-200">
           {loading ? (
             <div className="flex justify-center items-center h-full">
               <Spinner />

@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 // Importing the Prisma client from the local database configuration file
 import prisma from "../../db/prisma";
+import { getReceiverSocketId, io } from "../../socket/socket";
 
 // Exporting the default function which is an asynchronous function that takes a request and a response
 export default async (req: Request, res: Response) => {
@@ -66,6 +67,13 @@ export default async (req: Request, res: Response) => {
                     }
                 }
             });
+        }
+
+        const receiverSocketId = getReceiverSocketId(receiverId); // Get the receiver's socket ID
+
+        // If the receiver is online, emit a 'newMessage' event to the receiver with the new message data
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
         }
 
         // Return a 201 status code with a success message and the new message data
