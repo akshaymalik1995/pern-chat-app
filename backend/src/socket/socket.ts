@@ -1,18 +1,20 @@
 import { Server } from "socket.io"; // Importing the Server class from the "socket.io" module
 import http from "http"; // Importing the "http" module
 import express from "express"; // Importing the "express" module
+import dotenv from "dotenv"; // Importing the "dotenv" module
 
 const app = express(); // Creating an instance of the Express application
-
+dotenv.config()
 export const getReceiverSocketId = (receiverId: string) => {
     // Function to get the socket ID of the receiver user
     return userSockets.get(receiverId); // Returning the socket ID of the receiver user from the userSockets Map
 }
 
 const server = http.createServer(app); // Creating an HTTP server using the Express application
+
 const io = new Server(server, { // Creating a new instance of the Socket.IO server
     cors: {
-        origin: "*", // Allowing requests from the specified client URL
+        origin: [process.env.CLIENT_URL!], // Allowing requests from the specified client URL
         methods: ["GET", "POST"], // Allowing only GET and POST methods
     },
 });

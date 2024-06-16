@@ -24,7 +24,7 @@ export const useSocketContext = () : ISocketContext => {
 }
 
 // Define the URL for the socket connection
-const socketURL = 'http://localhost:5000';
+const socketURL = import.meta.env.MODE === 'development' ? 'http://localhost:5000' : '/';
 
 // SocketContextProvider component
 export const SocketContextProvider = ({ children }: { children: ReactNode }) => {
